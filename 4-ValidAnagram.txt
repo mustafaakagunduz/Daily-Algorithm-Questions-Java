@@ -1,0 +1,83 @@
+HASHMAP:
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ValidAnagram {
+    public static boolean isAnagram(String s, String t) {
+        // Eğer uzunluklar farklıysa, anagram olamazlar
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        // Karakter frekanslarını saymak için bir harita kullan
+        Map<Character, Integer> charCountMap = new HashMap<>();
+
+        // İlk stringin karakterlerini say
+        for (char c : s.toCharArray()) {
+            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+        }
+
+        // İkinci stringin karakterlerini say ve haritadan düş
+        for (char c : t.toCharArray()) {
+            if (!charCountMap.containsKey(c)) {
+                return false;
+            }
+            charCountMap.put(c, charCountMap.get(c) - 1);
+            if (charCountMap.get(c) < 0) {
+                return false;
+            }
+        }
+
+        // Tüm değerlerin sıfır olup olmadığını kontrol et
+        for (int count : charCountMap.values()) {
+            if (count != 0) {
+                return false;
+            }
+        }
+
+        return true; // Anagram olduklarını doğrula
+    }
+
+}
+
+
+ARRAY:
+
+public class ValidAnagram {
+    public static boolean isAnagram(String s, String t) {
+        // Eğer uzunluklar farklıysa, anagram olamazlar
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        // Karakter frekanslarını tutmak için bir dizi kullan (a-z için 26 elemanlı)
+        int[] charCount = new int[26];
+
+        // İlk stringin karakterlerini say
+        for (int i = 0; i < s.length(); i++) {
+            charCount[s.charAt(i) - 'a']++;
+        }
+
+        // İkinci stringin karakterlerini say ve diziden düş
+        for (int i = 0; i < t.length(); i++) {
+            charCount[t.charAt(i) - 'a']--;
+            // Eğer herhangi bir karakterin sayısı sıfırın altına inerse, anagram olamaz
+            if (charCount[t.charAt(i) - 'a'] < 0) {
+                return false;
+            }
+        }
+
+        // Dizideki tüm değerlerin sıfır olup olmadığını kontrol et
+        for (int count : charCount) {
+            if (count != 0) {
+                return false;
+            }
+        }
+
+        return true; // Anagram olduklarını doğrula
+    }
+
+}
+
+
