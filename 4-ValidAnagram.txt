@@ -1,3 +1,5 @@
+THIS FILE INCLUDES 4 SOLS
+
 HASHMAP:
 
 import java.util.HashMap;
