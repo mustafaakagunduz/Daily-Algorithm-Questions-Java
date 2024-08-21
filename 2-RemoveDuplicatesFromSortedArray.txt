@@ -18,6 +18,10 @@ class Solution {
 
         return index;
 
+        //returns how many distinct elements in the array
+
+        //input-array : [1,1,2,2,2,3,3,3,3,4] and index=1
+        //last-array  : [1,2,3,4,_,_,....] and index = 4 (At last index is 3 but, in for loop there is also "index++" for last iteration. This makes the "index" 4.. )
 
         
     }
