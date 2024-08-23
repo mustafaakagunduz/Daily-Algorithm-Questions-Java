@@ -1,0 +1,25 @@
+
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        // Sayıların frekanslarını hesapla
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : nums) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Frekans haritasını liste olarak al
+        List<Map.Entry<Integer, Integer>> frequencyList = new ArrayList<>(frequencyMap.entrySet());
+
+        // Frekansları büyükten küçüğe sırala
+        frequencyList.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+
+        // En yüksek frekanslı k elemanı al
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = frequencyList.get(i).getKey();
+        }
+
+        return result;
+    }
+}
