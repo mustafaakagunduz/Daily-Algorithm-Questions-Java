@@ -1,0 +1,37 @@
+benim çözüm:
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+        for(int i = 0 ; i<n ; i++){
+            nums1[i+m] = nums2[i];
+        }
+
+        Arrays.sort(nums1);
+
+        
+        
+    }
+}
+
+claude:
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int p1 = m - 1; // nums1'in son elemanının indeksi
+        int p2 = n - 1; // nums2'nin son elemanının indeksi
+        int p = m + n - 1; // Birleştirilmiş dizinin son elemanının indeksi
+
+        // Sondan başlayarak birleştirme
+        while (p2 >= 0) {
+            if (p1 >= 0 && nums1[p1] > nums2[p2]) {
+                nums1[p] = nums1[p1];
+                p1--;
+            } else {
+                nums1[p] = nums2[p2];
+                p2--;
+            }
+            p--;
+        }
+    }
+}
