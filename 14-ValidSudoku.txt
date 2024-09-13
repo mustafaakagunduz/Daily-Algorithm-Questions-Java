@@ -1,0 +1,49 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+    
+// 9 satır, 9 sütun ve 9 kutu için setler
+        HashSet<Character>[] rows = new HashSet[9];
+        HashSet<Character>[] cols = new HashSet[9];
+        HashSet<Character>[] boxes = new HashSet[9];
+        
+        // Set'leri başlatıyoruz
+        for (int i = 0; i < 9; i++) {
+            rows[i] = new HashSet<>();
+            cols[i] = new HashSet<>();
+            boxes[i] = new HashSet<>();
+        }
+        
+        // Tahtayı kontrol ediyoruz
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                char num = board[r][c];
+                
+                // Boş hücreleri atlıyoruz
+                if (num == '.') continue;
+                
+                // Aynı satırda tekrar var mı?
+                if (rows[r].contains(num)) {
+                    return false;
+                }
+                rows[r].add(num);
+                
+                // Aynı sütunda tekrar var mı?
+                if (cols[c].contains(num)) {
+                    return false;
+                }
+                cols[c].add(num);
+                
+                // Aynı 3x3 kutusunda tekrar var mı?
+                int boxIndex = (r / 3) * 3 + (c / 3);
+                if (boxes[boxIndex].contains(num)) {
+                    return false;
+                }
+                boxes[boxIndex].add(num);
+            }
+        }
+        
+        // Tüm kurallar geçildi, sudoku tahtası geçerli
+        return true;
+
+    }
+}
