@@ -1,0 +1,56 @@
+O(n) by using HashSet
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) {
+            numSet.add(num);
+        }
+
+        int longest = 0;
+
+        for (int n : numSet) {
+            if (!numSet.contains(n - 1)) {
+                int length = 1;
+                while (numSet.contains(n + length)) {
+                    length++;
+                }
+                longest = Math.max(length, longest);
+            } else continue;
+        }
+        return longest;
+    }
+}
+
+O(nlogn) by using sorting
+
+public class LongestConsecutiveSequence {
+
+    public static int longestConsecutive(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        
+        // 1. Array'i sıralama
+        Arrays.sort(nums);
+        
+        int longestStreak = 1; // En uzun ardışık dizinin uzunluğu
+        int currentStreak = 1; // Mevcut ardışık dizinin uzunluğu
+        
+        // 2. Ardışık elemanları kontrol etme
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) { // Eğer bir önceki elemanla aynı değilse
+                if (nums[i] == nums[i - 1] + 1) {
+                    // 3. Eğer ardışık ise, mevcut seriyi büyüt
+                    currentStreak++;
+                } else {
+                    // 4. Eğer ardışık değilse, en uzun ardışık seriyi güncelle
+                    longestStreak = Math.max(longestStreak, currentStreak);
+                    currentStreak = 1; // Yeni bir ardışık seri başlat
+                }
+            }
+        }
+        
+        // Son seriyi de kontrol edelim
+        return Math.max(longestStreak, currentStreak);
+    }
