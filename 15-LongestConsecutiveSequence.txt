@@ -1,4 +1,4 @@
-O(n) by using HashSet
+O(n) by using HashSet Data Structure
 
 class Solution {
     public int longestConsecutive(int[] nums) {
