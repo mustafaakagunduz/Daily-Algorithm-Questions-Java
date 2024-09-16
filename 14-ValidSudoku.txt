@@ -1,7 +1,7 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
     
-// 9 satır, 9 sütun ve 9 kutu için setler
+// 9 satır, 9 sütun ve 9 kutu için setler oluşturulur
         HashSet<Character>[] rows = new HashSet[9];
         HashSet<Character>[] cols = new HashSet[9];
         HashSet<Character>[] boxes = new HashSet[9];
