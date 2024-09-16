@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isValid(String s) {
+
+    Stack<Character> stack = new Stack<>();
+        
+        for (char c : s.toCharArray()) {
+            // Eğer açılan parantezse, yığına ekle
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } 
+            // Kapanan parantez olduğunda en üsttekiyle eşleştir
+            else {
+                // Yığın boşsa veya eşleşme yoksa false döner
+                if (stack.isEmpty()) return false;
+                
+                char top = stack.pop();
+                if (c == ')' && top != '(') return false;
+                if (c == '}' && top != '{') return false;
+                if (c == ']' && top != '[') return false;
+            }
+        }
+        
+        // Yığın tamamen boşsa parantezler doğru kapatılmıştır
+        return stack.isEmpty();    
+    }
+}
