@@ -4,9 +4,9 @@ class Solution {
 
         for (String token : tokens) {
             if (isOperator(token)) {
-                int b = stack.pop();
                 int a = stack.pop();
-                stack.push(doIslem(a, b, token));
+                int b = stack.pop();
+                stack.push(doIslem(b, a, token));
             } else {
                 stack.push(Integer.parseInt(token));
             }
