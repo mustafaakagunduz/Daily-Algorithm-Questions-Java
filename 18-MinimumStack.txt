@@ -26,14 +26,14 @@ class MinStack {
     
     public int getMin() {
 
-        int min = Integer.MAX_VALUE;
+        int minVal = Integer.MAX_VALUE;
 
         for(int n : stack){
-            if(n<min){
-                min = n;
+            if(n<minVal){
+                minVal = n;
             }
         }
-        return min;
+        return minVal;
         
     }
 }
