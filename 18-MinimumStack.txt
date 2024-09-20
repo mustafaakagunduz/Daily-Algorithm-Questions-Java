@@ -6,9 +6,9 @@ class MinStack {
         
     }
     
-    public void push(int val) {
+    public void push(int value) {
         
-        stack.add(val);
+        stack.add(value);
 
     }
     
