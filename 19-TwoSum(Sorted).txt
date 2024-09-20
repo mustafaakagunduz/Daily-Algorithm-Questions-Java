@@ -1,0 +1,22 @@
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int left = 0; // Başlangıçtaki sol pointer
+        int right = numbers.length - 1; // Başlangıçtaki sağ pointer
+
+        while (left < right) {
+            int sum = numbers[left] + numbers[right]; // İki sayının toplamı
+
+            if (sum == target) {
+                // İndeksler 1'den başlayarak isteniyor, bu yüzden +1 ekliyoruz
+                return new int[]{left + 1, right + 1};
+            } else if (sum < target) {
+                left++; // Toplam hedef değerden küçükse, sol pointeri sağa kaydırıyoruz
+            } else {
+                right--; // Toplam hedef değerden büyükse, sağ pointeri sola kaydırıyoruz
+            }
+        }
+
+        // Soru her zaman bir çözüm olduğunu garanti ettiğinden buraya ulaşılmayacak
+        return new int[]{-1, -1}; // Her ihtimale karşı
+    }
+}
