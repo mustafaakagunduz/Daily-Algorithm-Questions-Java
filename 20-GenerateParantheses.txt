@@ -1,10 +1,10 @@
 class Solution {
     
     public List<String> generateParenthesis(int n) {
-        List<String> res = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         Stack<Character> stack = new Stack<>();
-        backtrackFunc(n, 0, 0, stack, res);
-        return res;
+        backtrackFunc(n, 0, 0, stack, result);
+        return result;
     }
 
     private void backtrackFunc(int n, int openCounter, int closedCounter, Stack<Character> stack, List<String> res) {
