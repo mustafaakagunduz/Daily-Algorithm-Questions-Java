@@ -1,0 +1,51 @@
+//boyer-moore
+
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        int result = 0;
+        int count = 0;
+
+        for(int i=0; i<nums.length; i++){
+
+            if (count==0){
+                result = nums[i];
+            }
+
+            if(result == nums[i])
+                count++;
+            else
+                count--;
+
+
+
+        }
+        return result;
+    }
+}
+
+//hash-map:
+
+import java.util.HashMap;
+
+public class MajorityElement {
+    public static int majorityElement(int[] nums) {
+        // Create a HashMap to store the frequency of each element
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int n = nums.length;
+        
+        // Count the frequency of each element
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        
+        // Find the element that appears more than n/2 times
+        for (int key : map.keySet()) {
+            if (map.get(key) > n / 2) {
+                return key;
+            }
+        }
+        
+        // This return statement will never be reached since the majority element always exists
+        return -1;
+    }
