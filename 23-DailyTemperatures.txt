@@ -1,3 +1,5 @@
+Stack:
+
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
         int[] res = new int[temperatures.length];
@@ -14,3 +16,30 @@ class Solution {
         return res;
     }
 }
+
+Brute Force:
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+
+        int [] result = new int [temperatures.length];
+
+        int counter = 0;
+
+        for(int i=0; i<temperatures.length; i++){
+            counter = 0;
+            for(int j=i+1; j<temperatures.length;j++){
+                if(temperatures[j] > temperatures[i]){
+                    counter++;
+                    result[i]=counter;
+                    break;
+                }else{
+                    counter++;
+                }
+            } 
+        }
+
+        return result;
+        
+    }
+}
+
