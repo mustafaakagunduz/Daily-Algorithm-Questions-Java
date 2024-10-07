@@ -1,12 +1,12 @@
 
  
-        int res = numBottles;
+        int result = numBottles;
 
         
         while (numBottles > numExchange){
 
-            res += numBottles / numExchange;
+            result += numBottles / numExchange;
 
             numBottles = (numBottles / numExchange) + (numBottles % numExchange) ;
 
-        } return res;
+        } return result;
