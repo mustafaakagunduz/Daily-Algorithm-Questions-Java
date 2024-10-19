@@ -1,4 +1,4 @@
-//boyer-moore algorithm 
+//boyer-moore solution 
 
 class Solution {
     public int majorityElement(int[] nums) {
