@@ -1,5 +1,5 @@
 
-class Sol{
+class Solution{
 	public int missingNumber(int [ ] nums){
 
 	int sum = 0;
