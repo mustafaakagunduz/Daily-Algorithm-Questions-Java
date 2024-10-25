@@ -22,39 +22,30 @@ class Solution{
 }
 
 CyclicSort:
-public class MissingNumber {
-    public static int findMissingNumber(int[] nums) {
-        int n = nums.length;
+public int findMissingNumber(int[] nums) {
+    int n = nums.length; // Dizinin uzunluğu
 
-        // Elemanları doğru indekslerine yerleştir
-        for (int i = 0; i < n; ) {
-            // Sayı doğru aralıkta mı? 
-            // ve kendisiyle aynı indeks değilse
-            if (nums[i] < n && nums[i] != nums[nums[i]]) {
-                // Sayıyı doğru indeksine yerleştir
-                int temp = nums[i];
-                nums[i] = nums[temp];
-                nums[temp] = temp; // Doğru yere koy
-            } else {
-                i++; // İndeks artır
-            }
+    int i = 0;
+    while (i < n) {
+        // Sayı doğru aralıkta mı? ve kendisiyle aynı indeks değilse
+        if (nums[i] < n && nums[i] != nums[nums[i]]) {
+            // Sayıyı doğru indeksine yerleştir
+            int temp = nums[i];
+            nums[i] = nums[temp];
+            nums[temp] = temp; // Doğru yere koy
+        } else {
+            i++; // İndeks artır
         }
-
-        // Eksik sayıyı bul
-        for (int i = 0; i < n; i++) {
-            // İndeksle sayı eşleşmiyorsa eksik sayıyı bul
-            if (nums[i] != i) {
-                return i; // Eksik sayı
-            }
-        }
-
-        // Eğer tüm sayılar doğru yerinde ise, eksik sayı n'dir
-        return n;
     }
 
-    public static void main(String[] args) {
-        int[] nums = {3, 0, 1}; // Eksik sayı 2
-        System.out.println("Eksik Sayı: " + findMissingNumber(nums));
+    // Eksik sayıyı bulma
+    for (i = 0; i < n; i++) {
+        if (nums[i] != i) {
+            return i; // Eksik sayı
+        }
     }
+
+    return n; // Eğer tüm sayılar doğru yerindeyse eksik sayı n olur
 }
+
 
