@@ -1,4 +1,4 @@
-//boyer-moore solution 
+//boyer-moore sols 
 
 class Solution {
     public int majorityElement(int[] nums) {
