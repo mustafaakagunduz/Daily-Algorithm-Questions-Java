@@ -1,4 +1,4 @@
-
+class Solution{
   if (strs == null || strs.length == 0) {
             return "";
         }
@@ -18,5 +18,5 @@
         // Ortak önek
         return first.substring(0, i);
     }
-
+}
 
