@@ -1,4 +1,4 @@
-
+class Sol{
  
         int result = numBottles;
 
@@ -10,3 +10,5 @@
             numBottles = (numBottles / numExchange) + (numBottles % numExchange) ;
 
         } return result;
+
+}
