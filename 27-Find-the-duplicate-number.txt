@@ -1,0 +1,21 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+       int tortoise = nums[0];
+    int hare = nums[0];
+
+    // 2. Döngüyü bulmak (Floyd's Cycle Detection)
+    do {
+        tortoise = nums[tortoise]; // Bir adım ilerle
+        hare = nums[nums[hare]];   // İki adım ilerle
+    } while (tortoise != hare);
+
+    // 3. Döngünün başlangıcını bulmak
+    tortoise = nums[0]; // Tortoise'ı başa al
+    while (tortoise != hare) {
+        tortoise = nums[tortoise];
+        hare = nums[hare];
+    }
+
+    return hare; 
+    }
+}
