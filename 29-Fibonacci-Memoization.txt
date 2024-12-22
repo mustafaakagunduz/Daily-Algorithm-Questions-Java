@@ -1,0 +1,26 @@
+import java.util.HashMap;
+
+class Solution {
+    // HashMap ile memoization yapıyoruz
+    private HashMap<Integer, Integer> memo = new HashMap<>();
+
+    public int fib(int n) {
+        // Base cases
+        if (n <= 1) {
+            return n;
+        }
+
+        // Eğer sonuç daha önce hesaplanmışsa, direkt olarak döndürüyoruz
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+
+        // Fibonacci hesaplaması
+        int result = fib(n - 1) + fib(n - 2);
+
+        // Hesaplanan değeri memo'ya kaydediyoruz
+        memo.put(n, result);
+
+        return result;
+    }
+}
