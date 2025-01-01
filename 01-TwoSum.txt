@@ -1,4 +1,4 @@
-public class Soluton {
+public class Sol {
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<>();
         
