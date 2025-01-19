@@ -6,7 +6,7 @@ Return the merged string.
 
  
 
-Example 1:
+Example:
 
 Input: word1 = "abc", word2 = "pqr"
 Output: "apbqcr"
