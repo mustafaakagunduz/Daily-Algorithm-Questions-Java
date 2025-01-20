@@ -17,7 +17,7 @@ merged: a p b q c r
 
 
 
-class Solution {
+class Sol {
     public String mergeAlternately(String word1, String word2) {
 
         StringBuilder merged = new StringBuilder();
