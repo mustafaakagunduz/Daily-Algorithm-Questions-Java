@@ -1,0 +1,54 @@
+benim çözüm:
+
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+        List<Boolean> result = new ArrayList<>();
+
+        int max=0;
+
+        for(int i : candies){
+            max = Math.max(i,max);
+        }
+
+        for(int i:candies){
+            if(i+extraCandies >= max)
+                result.add(true);
+            else
+                result.add(false);
+        }
+
+        return result;
+   
+    } 
+    
+}
+
+beats %84 time %53 memo.
+
+gpt:
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        List<Boolean> result = new ArrayList<>();
+        int maxCandies = 0;
+
+        // Maksimum şeker sayısını bul
+        for (int candy : candies) {
+            if (candy > maxCandies) {
+                maxCandies = candy;
+            }
+        }
+
+        // Her çocuğun, ekstra şekerlerle en çok şekeri olup olmadığını kontrol et
+        for (int candy : candies) {
+            result.add(candy + extraCandies >= maxCandies);
+        }
+
+        return result;
+    }
+}
+
+beats %100 time, %13 memo
