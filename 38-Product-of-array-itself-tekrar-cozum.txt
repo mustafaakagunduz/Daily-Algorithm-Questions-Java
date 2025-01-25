@@ -1,0 +1,31 @@
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+
+        int n = nums.length;
+        int [] leftProducts = new int [n];
+        int [] rightProducts = new int [n];
+        int [] result = new int [n];
+
+        /*LPS
+        Burada, soldan sağa doğru gidiyoruz, ilk indisi peşinen 1 atadığımız için hep leftproduct'ın bir önceki elemanıyla nums'ın ona denk gelen indisindeki sayıyı çarpa çarpa gidiyoruz
+        */
+        leftProducts[0] = 1;
+        for(int i=1;i<n;i++){
+            leftProducts[i] = leftProducts[i-1] * nums[i-1];
+        }
+
+        /*RPS
+        Bu sefer soldan sağa gitttiğimiz ve en solu peşinen 1 verdiğimiz için, hep bulunduğumuz indisin bir sağındakini, nums'un ona denk gelen indisindeki sayı ile çarpıyoruz. her adımda bir sağındakini almamızın sebebi (LPS'de de soldakini almamızın sebebi) bi yanımızdaki elemanın son çarpımı tutuyor oluşudur. */
+        rightProducts[n-1] = 1;
+        for(int i=n-2;i>=0;i--){
+            rightProducts[i] = rightProducts[i+1] * nums[i+1];
+        }
+
+
+        for(int i=0; i<n; i++){
+            result[i] = leftProducts[i] * rightProducts[i];
+        }
+
+        return result;
+    }
+}
