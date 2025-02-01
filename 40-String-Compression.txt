@@ -24,30 +24,29 @@ Explanation: The groups are "a" and "bbbbbbbbbbbb". This compresses to "ab12".
 
 class Solution {
     public int compress(char[] chars) {
-        int index = 0;  // Yazma konumu
-        int i = 0;      // Okuma konumu
+        
+        int writer = 0; //we will use this value to fill the array
+        int reader = 0; //this will iterate entire array
 
-        while (i < chars.length) {
-            char currentChar = chars[i];
-            int count = 0;
+        while(reader < chars.length){
+            char currentChar = chars[reader];
+            int sameLetterCounter=0;
+        
 
-            // Aynı karakterleri say
-            while (i < chars.length && chars[i] == currentChar) {
-                i++;
-                count++;
+            while(reader < chars.length && currentChar == chars[reader]){
+                reader++;
+                sameLetterCounter++;
             }
 
-            // Karakteri diziye ekle
-            chars[index++] = currentChar;
+            chars[writer++] = currentChar;
 
-            // Eğer tekrar sayısı 1'den büyükse, sayıyı karakterlere bölerek ekle
-            if (count > 1) {
-                for (char c : String.valueOf(count).toCharArray()) {
-                    chars[index++] = c;
-                }
+            if(sameLetterCounter>1){
+
+                for(char c: String.valueOf(sameLetterCounter).toCharArray())
+                    chars[writer++]=c;
             }
         }
-
-        return index; // Yeni uzunluğu döndür
+        return writer;
     }
 }
+
