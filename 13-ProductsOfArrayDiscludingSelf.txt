@@ -1,49 +1,31 @@
-class Sol {
+public class Solution {
     public int[] productExceptSelf(int[] nums) {
-         int n = nums.length;
-        int[] leftProducts = new int[n];
-        int[] rightProducts = new int[n];
-        int[] output = new int[n];
-        
-        // Sol çarpımları hesapla
+
+        int n = nums.length;
+        int [] leftProducts = new int [n];
+        int [] rightProducts = new int [n];
+        int [] result = new int [n];
+
+        /*LPS
+        Burada, soldan sağa doğru gidiyoruz, ilk indisi peşinen 1 atadığımız için hep leftproduct'ın bir önceki elemanıyla nums'ın ona denk gelen indisindeki sayıyı çarpa çarpa gidiyoruz
+        */
         leftProducts[0] = 1;
-        for (int i = 1; i < n; i++) {
+        for(int i=1;i<n;i++){
             leftProducts[i] = leftProducts[i-1] * nums[i-1];
         }
-        
-        // Sağ çarpımları hesapla
+
+        /*RPS
+        Bu sefer sağdan sola gitttiğimiz ve en sağı peşinen 1 verdiğimiz için, hep bulunduğumuz indisin bir sağındakini, nums'un ona denk gelen indisindeki sayı ile çarpıyoruz. her adımda bir sağındakini almamızın sebebi (LPS'de de soldakini almamızın sebebi) bi yanımızdaki elemanın son çarpımı tutuyor oluşudur. */
         rightProducts[n-1] = 1;
-        for (int i = n-2; i >= 0; i--) {
+        for(int i=n-2;i>=0;i--){
             rightProducts[i] = rightProducts[i+1] * nums[i+1];
         }
-        
-        // Sol ve sağ çarpımları çarp
-        for (int i = 0; i < n; i++) {
-            output[i] = leftProducts[i] * rightProducts[i];
+
+
+        for(int i=0; i<n; i++){
+            result[i] = leftProducts[i] * rightProducts[i];
         }
-        
-        return output;
+
+        return result;
     }
 }
-
-//short form
-/*
-        int n = nums.length;
-        int[] output = new int[n];
-        
-        // İlk geçiş: Soldan sağa çarpımları hesapla
-        int leftProduct = 1;
-        for (int i = 0; i < n; i++) {
-            output[i] = leftProduct;
-            leftProduct *= nums[i];
-        }
-        
-        // İkinci geçiş: Sağdan sola çarpımları hesapla ve sonuçları güncelle
-        int rightProduct = 1;
-        for (int i = n - 1; i >= 0; i--) {
-            output[i] *= rightProduct;
-            rightProduct *= nums[i];
-        }
-        
-        return output;
-*/
