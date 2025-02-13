@@ -26,14 +26,12 @@ Her adımda maximum pencere uzunluğunu takip edeceğiz
 
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        // İki pointer kullanacağız: left ve right
-        int left = 0;
-        int maxOnes = 0;
-        int zeroCount = 0;  // Pencere içindeki 0 sayısını tutacak
+        int left = 0;           // pencere başlangıcı
+        int maxOnes = 0;        // en uzun pencere
+        int zeroCount = 0;      // pencere içindeki 0 sayısı
         
-        // right pointer'ı ilerleterek pencereyi genişletiyoruz
         for (int right = 0; right < nums.length; right++) {
-            // Eğer current eleman 0 ise, zeroCount'u artır
+            // Yeni eklenen eleman 0 ise sayacı artır
             if (nums[right] == 0) {
                 zeroCount++;
             }
@@ -47,7 +45,7 @@ class Solution {
                 left++;
             }
             
-            // Current pencere uzunluğunu hesapla ve maxOnes'ı güncelle
+            // Mevcut pencere uzunluğunu hesapla
             maxOnes = Math.max(maxOnes, right - left + 1);
         }
         
