@@ -1,0 +1,56 @@
+question:
+Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+
+ 
+
+Example 1:
+
+Input: nums = [1,1,1,0,0,0,1,1,1,1,0], k = 2
+Output: 6
+Explanation: [1,1,1,0,0,1,1,1,1,1,1]
+Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
+Example 2:
+
+Input: nums = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], k = 3
+Output: 10
+Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
+Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
+
+Bu problem için "sliding window" yaklaşımını kullanabiliriz. Temel fikir şöyle:
+
+Bir pencere oluşturacağız ve bu pencereyi genişletebildiğimiz kadar genişleteceğiz
+Pencere içinde en fazla k tane 0'ı 1'e çevirebiliriz
+Eğer k'dan fazla 0 varsa pencerede, sol tarafı daraltmamız gerekir
+Her adımda maximum pencere uzunluğunu takip edeceğiz
+
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        // İki pointer kullanacağız: left ve right
+        int left = 0;
+        int maxOnes = 0;
+        int zeroCount = 0;  // Pencere içindeki 0 sayısını tutacak
+        
+        // right pointer'ı ilerleterek pencereyi genişletiyoruz
+        for (int right = 0; right < nums.length; right++) {
+            // Eğer current eleman 0 ise, zeroCount'u artır
+            if (nums[right] == 0) {
+                zeroCount++;
+            }
+            
+            // Eğer penceredeki 0 sayısı k'dan fazlaysa
+            // pencereyi daralt
+            while (zeroCount > k) {
+                if (nums[left] == 0) {
+                    zeroCount--;
+                }
+                left++;
+            }
+            
+            // Current pencere uzunluğunu hesapla ve maxOnes'ı güncelle
+            maxOnes = Math.max(maxOnes, right - left + 1);
+        }
+        
+        return maxOnes;
+    }
+}
