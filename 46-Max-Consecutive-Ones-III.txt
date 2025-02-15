@@ -28,19 +28,19 @@ class Solution {
     public int longestOnes(int[] nums, int k) {
         int left = 0;           // pencere başlangıcı
         int maxOnes = 0;        // en uzun pencere
-        int zeroCount = 0;      // pencere içindeki 0 sayısı
+        int zeroCounter = 0;      // pencere içindeki 0 sayısı
         
         for (int right = 0; right < nums.length; right++) {
             // Yeni eklenen eleman 0 ise sayacı artır
             if (nums[right] == 0) {
-                zeroCount++;
+                zeroCounter++;
             }
             
             // Eğer penceredeki 0 sayısı k'dan fazlaysa
             // pencereyi daralt
-            while (zeroCount > k) {
+            while (zeroCounter > k) {
                 if (nums[left] == 0) {
-                    zeroCount--;
+                    zeroCounter--;
                 }
                 left++;
             }
