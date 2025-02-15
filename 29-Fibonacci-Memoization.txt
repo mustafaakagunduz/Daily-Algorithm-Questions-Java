@@ -1,6 +1,4 @@
-import java.util.HashMap;
-
-class Solution {
+class Sol {
     // HashMap ile memoization yapıyoruz
     private HashMap<Integer, Integer> memo = new HashMap<>();
 
