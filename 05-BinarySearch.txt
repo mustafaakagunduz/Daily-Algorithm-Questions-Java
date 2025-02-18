@@ -1,4 +1,4 @@
-class Sol {
+class Solution {
     public int search(int[] nums, int target) {
 
         int leftIndex = 0;
