@@ -1,3 +1,26 @@
+Bu kod, "Generate Parentheses" veya "Parantez Oluşturma" probleminin çözümüdür. Problem şu şekildedir:
+n sayısı verildiğinde, n çift parantezden oluşan tüm geçerli (well-formed) parantez kombinasyonlarını oluşturmayı amaçlar.
+Örneğin:
+
+n = 1 için çıktı: ["()"]
+n = 2 için çıktı: ["(())", "()()"]
+n = 3 için çıktı: ["((()))", "(()())", "(())()", "()(())", "()()()"]
+
+Kod, backtracking (geri izleme) algoritmasını kullanarak:
+
+Her adımda açık '(' veya kapalı ')' parantez ekler
+Şu kurallara göre ilerler:
+
+Açık parantez sayısı n'den küçükse yeni açık parantez ekleyebilir
+Kapalı parantez sayısı açık parantez sayısından küçükse yeni kapalı parantez ekleyebilir
+
+
+Açık ve kapalı parantez sayıları n'e eşit olduğunda, oluşan kombinasyonu sonuç listesine ekler
+
+Bu problem, özellikle algoritma mülakatlarında ve recursion (özyineleme) ile backtracking konularının test edilmesinde sıkça kullanılan klasik bir problemdir.
+
+-------
+
 class Sol {
     
     public List<String> generateParenthesis(int n) {
@@ -7,8 +30,8 @@ class Sol {
         return result;
     }
 
-    private void backtrackFunc(int n, int openCounter, int closedCounter, Stack<Character> stack, List<String> res) {
-        if (openCounter == closedCounter && openCounter == n) {
+    private void backtrackFunc(int n, int openingParanthesesCounter, int closingParanthesesCounter, Stack<Character> stack, List<String> res) {
+        if (openingParanthesesCounter == closingParanthesesCounter && openingParanthesesCounter == n) {
             StringBuilder sb = new StringBuilder();
             for (char c : stack) {
                 sb.append(c);
@@ -17,14 +40,14 @@ class Sol {
             return;
         }
 
-        if (openCounter < n) {
+        if (openingParanthesesCounter < n) {
             stack.push('(');
-            backtrackFunc(n, openCounter + 1, closedCounter, stack, res);
+            backtrackFunc(n, openingParanthesesCounter + 1, closingParanthesesCounter, stack, res);
             stack.pop();
         }
-        if (closedCounter < openCounter) {
+        if (closingParanthesesCounter < openingParanthesesCounter) {
             stack.push(')');
-            backtrackFunc(n, openCounter, closedCounter + 1, stack, res);
+            backtrackFunc(n, openingParanthesesCounter, closingParanthesesCounter + 1, stack, res);
             stack.pop();
         }
     }
