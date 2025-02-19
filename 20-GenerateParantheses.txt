@@ -1,4 +1,4 @@
-class Solution {
+class Sol {
     
     public List<String> generateParenthesis(int n) {
         List<String> result = new ArrayList<>();
