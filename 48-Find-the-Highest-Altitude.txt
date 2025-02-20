@@ -26,7 +26,7 @@ Son olarak bu yükseklikler arasından en büyük değeri bulup döndürüyoruz
 
 ------
 
-class Solution {
+class Sol {
     public int largestAltitude(int[] gain) {
         int[] newGain = new int[gain.length + 1];
         newGain[0] = 0;  // başlangıç yüksekliği 0
