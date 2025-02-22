@@ -1,0 +1,93 @@
+Given an array of integers nums, calculate the pivot index of this array.
+
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+
+Return the leftmost pivot index. If no such index exists, return -1.
+
+ 
+
+Example 1:
+
+Input: nums = [1,7,3,6,5,6]
+Output: 3
+Explanation:
+The pivot index is 3.
+Left sum = nums[0] + nums[1] + nums[2] = 1 + 7 + 3 = 11
+Right sum = nums[4] + nums[5] = 5 + 6 = 11
+Example 2:
+
+Input: nums = [1,2,3]
+Output: -1
+Explanation:
+There is no index that satisfies the conditions in the problem statement.
+Example 3:
+
+Input: nums = [2,1,-1]
+Output: 0
+Explanation:
+The pivot index is 0.
+Left sum = 0 (no elements to the left of index 0)
+Right sum = nums[1] + nums[2] = 1 + -1 = 0
+
+--------
+
+Bu çözümün çalışma mantığı:
+
+Önce dizinin tüm elemanlarının toplamını buluyoruz (totalSum)
+Her indeksi pivot adayı olarak değerlendiriyoruz
+Her adımda:
+
+Sol tarafın toplamını biliyoruz (leftSum)
+Sağ tarafın toplamını hesaplıyoruz: totalSum - leftSum - şuanki sayı
+Eğer sol ve sağ taraf eşitse, pivot bulundu demektir
+Eşit değilse, sol tarafa şuanki sayıyı ekleyip devam ediyoruz
+
+
+
+Örnek:
+nums = [1,7,3,6,5,6]
+
+totalSum = 28
+i=0 için: leftSum=0, rightSum=27 (eşit değil)
+i=1 için: leftSum=1, rightSum=20 (eşit değil)
+i=2 için: leftSum=8, rightSum=17 (eşit değil)
+i=3 için: leftSum=11, rightSum=11 (eşit! Pivot bulundu)
+
+Bu çözüm:
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Bu yaklaşım, her indeksin gerçekten pivot olup olmadığını doğru şekilde kontrol ediyor ve en soldaki pivot indeksini buluyor.
+
+-------------------
+
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int totalSum = 0;  // Dizinin toplam değeri
+        int leftSum = 0;   // Sol tarafın toplamı
+        
+        // Toplam değeri hesapla
+        for (int num : nums) {
+            totalSum += num;
+        }
+        
+        // Her indexi kontrol et
+        for (int i = 0; i < nums.length; i++) {
+            // Sağ tarafın toplamı = Toplam - Sol taraf - Şuanki sayı
+            int rightSum = totalSum - leftSum - nums[i];
+            
+            // Sol ve sağ taraf eşitse pivot bulundu
+            if (leftSum == rightSum) {
+                return i;
+            }
+            
+            // Sol tarafa şuanki sayıyı ekle
+            leftSum += nums[i];
+        }
+        
+        return -1;  // Pivot bulunamadı
+    }
+}
