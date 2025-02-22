@@ -1,4 +1,4 @@
-class Sol {
+class Solution {
     // HashMap ile memoization yapıyoruz
     private HashMap<Integer, Integer> memo = new HashMap<>();
 
