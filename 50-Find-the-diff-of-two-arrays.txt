@@ -1,4 +1,4 @@
-class Solution {
+class Sol {
     public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
         
         List<List<Integer>> listOfLists = new ArrayList<>();
