@@ -101,7 +101,7 @@ class Solution {
     }
 }
 
-SET:
+SET: //bunu incele
 class Solution {
     public boolean isAnagram(String s, String t) {
         // Kelimelerin uzunlukları eşit değilse, anagram olamazlar
