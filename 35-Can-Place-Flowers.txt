@@ -1,4 +1,4 @@
-class Solution {
+class Sol {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
         // Create a new array with 0 at the beginning and end
         int[] f = new int[flowerbed.length + 2];
