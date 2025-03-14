@@ -1,0 +1,113 @@
+In the world of Dota2, there are two parties: the Radiant and the Dire.
+
+The Dota2 senate consists of senators coming from two parties. Now the Senate wants to decide on a change in the Dota2 game. The voting for this change is a round-based procedure. In each round, each senator can exercise one of the two rights:
+
+Ban one senator's right: A senator can make another senator lose all his rights in this and all the following rounds.
+Announce the victory: If this senator found the senators who still have rights to vote are all from the same party, he can announce the victory and decide on the change in the game.
+Given a string senate representing each senator's party belonging. The character 'R' and 'D' represent the Radiant party and the Dire party. Then if there are n senators, the size of the given string will be n.
+
+The round-based procedure starts from the first senator to the last senator in the given order. This procedure will last until the end of voting. All the senators who have lost their rights will be skipped during the procedure.
+
+Suppose every senator is smart enough and will play the best strategy for his own party. Predict which party will finally announce the victory and change the Dota2 game. The output should be "Radiant" or "Dire".
+
+ 
+
+Example 1:
+
+Input: senate = "RD"
+Output: "Radiant"
+Explanation: 
+The first senator comes from Radiant and he can just ban the next senator's right in round 1. 
+And the second senator can't exercise any rights anymore since his right has been banned. 
+And in round 2, the first senator can just announce the victory since he is the only guy in the senate who can vote.
+Example 2:
+
+Input: senate = "RDD"
+Output: "Dire"
+Explanation: 
+The first senator comes from Radiant and he can just ban the next senator's right in round 1. 
+And the second senator can't exercise any rights anymore since his right has been banned. 
+And the third senator comes from Dire and he can ban the first senator's right in round 1. 
+And in round 2, the third senator can just announce the victory since he is the only guy in the senate who can vote.
+
+------
+
+class Solution {
+    public String predictPartyVictory(String senate) {
+        int n = senate.length();
+        
+        // İki parti için sıra oluşturuyoruz
+        Queue<Integer> radiant = new LinkedList<>();
+        Queue<Integer> dire = new LinkedList<>();
+        
+        // Senatörleri partilerine göre sıralara yerleştiriyoruz
+        // Senatörlerin konumlarını (indekslerini) saklıyoruz
+        for (int i = 0; i < n; i++) {
+            if (senate.charAt(i) == 'R') {
+                radiant.offer(i);
+            } else {
+                dire.offer(i);
+            }
+        }
+        
+        // Oylamayı simüle ediyoruz
+        while (!radiant.isEmpty() && !dire.isEmpty()) {
+            // Her partiden bir senatör çıkarıyoruz
+            int radiantIndex = radiant.poll();
+            int direIndex = dire.poll();
+            
+            // Sıralamada önce olan senatör, diğerini engeller
+            // ve bir sonraki tura geçer (n ekleyerek sıralamada en sona atarız)
+            if (radiantIndex < direIndex) {
+                radiant.offer(radiantIndex + n);
+            } else {
+                dire.offer(direIndex + n);
+            }
+        }
+        
+        // Hangi parti kaldıysa o kazanır
+        return radiant.isEmpty() ? "Dire" : "Radiant";
+    }
+}
+
+--------
+
+Burada kilit nokta, her senatörün diğer partiden bir senatörü engellemek isteyeceğidir. En iyi strateji, rakip partiden mümkün olan en erken sıradaki senatörü engellemektir.
+
+## Çözümün Açıklaması
+
+Bu problemi çözmek için kuyruk (Queue) veri yapısını kullandım. İşte adım adım açıklaması:
+
+### Algoritma Mantığı
+1. Her parti için ayrı bir kuyruk oluşturuyoruz: `radiant` ve `dire`
+2. Senatörleri indeksleriyle birlikte ilgili kuyruklara yerleştiriyoruz
+3. Her turda her iki kuyruktan bir senatör çıkarıp karşılaştırıyoruz
+4. İndeksi daha küçük olan (yani sıralamada daha önce olan) senatör, diğerini engeller
+5. Engellemeyi yapan senatör tekrar kuyruğa eklenir, ama bir sonraki tur için
+6. Bu işlem bir parti tamamen elenene kadar devam eder
+7. Son kalan parti kazanan olur
+
+### Zaman Karmaşıklığı
+- O(n), burada n senatör sayısıdır
+
+### Alan Karmaşıklığı
+- O(n), iki kuyruk için gerekli alandır
+
+### Anahtar Noktalar
+- Bir senatörün tekrar oy kullanabilmesi için, onu kuyruğun sonuna eklememiz gerekiyor. Bunun için `indeks + n` değerini ekliyoruz. Bu, tüm mevcut senatörlerden sonra gelecek şekilde yeni bir pozisyon oluşturur.
+- Her zaman indeksi küçük olan senatör (yani sırada önce olan) diğerini engeller. Bu, problemin "en iyi strateji" gereksinimine uyar - her senatör kendi partisi için en iyi kararı verecektir.
+
+### Örneklerin Açıklaması
+
+**Örnek 1: "RD"**
+- İlk senatör R (indeks 0), ikinci senatör D (indeks 1)
+- R önce geldiği için D'yi engeller
+- D artık oy kullanamaz, R kazanır
+
+**Örnek 2: "RDD"**
+- İlk tur: R (0) ve D (1) karşılaştırılır, R önce geldiği için D'yi engeller
+- İkinci D (2) engellenmemiştir
+- Bir sonraki tur: R (0) ve D (2) karşılaştırılır
+- R ve D arasındaki indeks karşılaştırması yapılır, R önce geldiği için D'yi engeller
+- Ancak burada strateji devreye girer: D (2) bir önceki turda R (0)'ı engellemiş olur
+- Bu durumda R kuyruğu boşalır ve D kazanır
