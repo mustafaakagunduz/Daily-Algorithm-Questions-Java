@@ -1,0 +1,47 @@
+Input: head = [1,3,4,7,1,2,6]
+Output: [1,3,4,1,2,6]
+Explanation:
+The above figure represents the given linked list. The indices of the nodes are written below.
+Since n = 7, node 3 with value 7 is the middle node, which is marked in red.
+We return the new list after removing this node. 
+
+-----
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        // Özel durum: Liste boşsa veya tek düğüm varsa
+        if (head == null || head.next == null) {
+            return null;
+        }
+        
+        // İki işaretçi kullanacağız: slow ve fast
+        // Ayrıca önceki düğümü de takip etmemiz gerekiyor
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
+        
+        // Fast işaretçisi slow'dan iki kat hızlı ilerler
+        // Fast listenin sonuna geldiğinde, slow tam ortadadır
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;  // İki adım ilerle
+            prev = slow;            // Önceki düğümü kaydet
+            slow = slow.next;       // Bir adım ilerle
+        }
+        
+        // Şimdi slow orta düğümü gösteriyor, bunu silelim
+        // prev.next = slow.next demek, prev'i slow'un bir sonraki düğümüne bağlamak anlamına gelir
+        prev.next = slow.next;
+        
+        return head;
+    }
+}
