@@ -5,7 +5,7 @@ HASHMAP:
 import java.util.HashMap;
 import java.util.Map;
 
-public class ValidAnagram {
+public class ValidAnagramSol {
     public static boolean isAnagram(String s, String t) {
         // Eğer uzunluklar farklıysa, anagram olamazlar
         if (s.length() != t.length()) {
