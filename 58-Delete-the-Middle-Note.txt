@@ -17,7 +17,7 @@ We return the new list after removing this node.
  * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {
+class Sol {
     public ListNode deleteMiddle(ListNode head) {
         // Özel durum: Liste boşsa veya tek düğüm varsa
         if (head == null || head.next == null) {
