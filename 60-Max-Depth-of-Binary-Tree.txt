@@ -1,0 +1,139 @@
+Given the root of a binary tree, return its maximum depth.
+
+A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+Example 2:
+
+Input: root = [1,null,2]
+Output: 2
+
+
+Çözüm Yaklaşımı
+Bu problem için en uygun yaklaşım rekürsif (recursive) bir çözüm olacaktır. İkili ağaç yapısı doğası gereği rekürsif bir yapıya sahiptir.
+Rekürsif çözümün mantığı şu şekildedir:
+
+Eğer kök düğüm (root) null ise, derinlik 0'dır.
+Değilse, sol alt ağacın maksimum derinliği ve sağ alt ağacın maksimum derinliğinden büyük olanı bulup 1 ekleriz (kök düğümü sayma).
+
+----
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+        // Base case: Eğer ağaç boşsa (root null ise) derinlik 0'dır
+        if (root == null) {
+            return 0;
+        }
+        
+        // Sol alt ağacın maksimum derinliğini hesapla
+        int leftDepth = maxDepth(root.left);
+        
+        // Sağ alt ağacın maksimum derinliğini hesapla
+        int rightDepth = maxDepth(root.right);
+        
+        // İki alt ağaçtan maksimum derinliğe sahip olanı seç ve 1 ekle (kök düğümü)
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+}
+
+------
+
+Algoritmanın Açıklaması ve Analizi
+
+Base Case (Temel Durum):
+
+Eğer root null ise, bu boş bir ağaç demektir ve derinliği 0'dır.
+
+
+Recursive Case (Özyinelemeli Durum):
+
+Sol alt ağacın maksimum derinliğini bulmak için maxDepth(root.left) çağrısı yapılır.
+Sağ alt ağacın maksimum derinliğini bulmak için maxDepth(root.right) çağrısı yapılır.
+Bu iki derinlikten büyük olanı seçilir ve kök düğümü temsil eden 1 eklenir.
+
+
+
+Zaman ve Alan Karmaşıklığı
+
+Zaman Karmaşıklığı: O(n), burada n ağaçtaki düğüm sayısıdır. Her düğümü tam olarak bir kez ziyaret ediyoruz.
+Alan Karmaşıklığı: O(h), burada h ağacın yüksekliğidir. Bu, rekürsif çağrı yığını (call stack) için gereken alandır. En kötü durumda (ağaç bir çizgi gibi olduğunda), bu O(n) olabilir. En iyi durumda (dengeli ağaç), bu O(log n) olur.
+
+Bu algoritma, ikili ağaçların pek çok probleminde kullanılan temel bir rekürsif yapıyı takip ediyor. Basit, anlaşılır ve etkili bir çözümdür.
+
+----
+
+   1
+   / \
+  2   3
+ / \
+4   5
+
+
+Bu ağaç için rekürsif çağrılar şöyle ilerler:
+
+maxDepth(1) çağrılır
+
+leftDepth = maxDepth(2) hesaplanmalı
+
+maxDepth(2) çağrılır
+
+leftDepth = maxDepth(4) hesaplanmalı
+
+maxDepth(4) çağrılır
+
+leftDepth = maxDepth(null) = 0
+rightDepth = maxDepth(null) = 0
+Sonuç: max(0, 0) + 1 = 1 (4 düğümünün derinliği)
+
+
+
+
+rightDepth = maxDepth(5) hesaplanmalı
+
+maxDepth(5) çağrılır
+
+leftDepth = maxDepth(null) = 0
+rightDepth = maxDepth(null) = 0
+Sonuç: max(0, 0) + 1 = 1 (5 düğümünün derinliği)
+
+
+
+
+Sonuç: max(1, 1) + 1 = 2 (2 düğümünün derinliği)
+
+
+
+
+rightDepth = maxDepth(3) hesaplanmalı
+
+maxDepth(3) çağrılır
+
+leftDepth = maxDepth(null) = 0
+rightDepth = maxDepth(null) = 0
+Sonuç: max(0, 0) + 1 = 1 (3 düğümünün derinliği)
+
+
+
+
+Sonuç: max(2, 1) + 1 = 3 (1 düğümünün derinliği, yani ağacın toplam derinliği)
+
+
+
+Burada her rekürsif çağrı şunları yapıyor:
+
+Eğer bir düğüm yapraktaysa (leaf node - sol ve sağ çocukları null), derinlik 1 olur.
+Eğer bir düğümün çocukları varsa, sol ve sağ alt ağaçların derinliğini hesaplar, büyük olanı seçer ve kendi düğümü için 1 ekler.
+
+Artış şöyle gerçekleşiyor:
+
+Değişkenler doğrudan arttırılmıyor, her rekürsif çağrı kendi derinliğini hesaplıyor
+Yaprak düğümlerde derinlik 1 olarak başlıyor
+Yukarı doğru çıkarken, her seviyede max(leftDepth, rightDepth) + 1 hesaplanıyor
+Bu "+1" işlemi, her seviyede derinliğin artmasını sağlıyor
+
+Aslında rekürsif yapı, yığında (stack) geriye doğru çözülerek çalışıyor ve her düğüm seviyesi için derinlik değeri yukarı doğru birikimli olarak ilerliyor. Bu şekilde en derin yolun uzunluğu hesaplanmış oluyor.
+
+
+
