@@ -15,26 +15,27 @@ Number of water bottles you can drink: 9 + 3 + 1 = 13.
 
 class Solution {
     public int numWaterBottles(int numBottles, int numExchange) {
-        int totalDrunk = 0;
-        int emptyBottles = 0;
+
+        int bastakiSiseSayisi = numBottles;
+        int iadeKatsayisi = numExchange;
+        //yukaridaki iki degiskeni, çözümü türkçe yapmak için tanımladım..
         
-        // Initially drink all bottles
-        totalDrunk = numBottles;
-        emptyBottles = numBottles;
-        
-        // While we have enough empty bottles to exchange
-        while (emptyBottles >= numExchange) {
-            // Calculate how many full bottles we get from exchange
-            int newBottles = emptyBottles / numExchange;
-            
-            // Update total drunk by adding new bottles
-            totalDrunk += newBottles;
-            
-            // Update empty bottles: 
-            // remaining empties that couldn't be exchanged + new empties from drinking
-            emptyBottles = (emptyBottles % numExchange) + newBottles;
+        int icilen = bastakiSiseSayisi;
+        int bosSise = icilen;
+
+        while(bosSise >= iadeKatsayisi){
+
+            int ucretsizIcecek = bosSise / iadeKatsayisi;
+
+            icilen += ucretsizIcecek;
+
+            bosSise = (bosSise % iadeKatsayisi) + ucretsizIcecek;
+
+
         }
-        
-        return totalDrunk;
+
+        return icilen;
+
+
     }
 }
