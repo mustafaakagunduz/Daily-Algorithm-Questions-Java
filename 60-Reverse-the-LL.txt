@@ -32,3 +32,19 @@ class Solution {
         return prev;  // finalda prev, tersine çevrilmiş listenin başını tutuyor
     }
 }
+---
+
+Algoritmanın temel adımları şöyle:
+
+prev'i null ile başlatıyorum çünkü tersine çevrilmiş listenin son elemanı null'ı göstermelidir
+curr'i liste başı (head) ile başlatıyorum
+curr null olana kadar (listenin sonuna gelene kadar) döngüyü sürdürüyorum
+
+Her adımda:
+
+1-curr'in bir sonraki düğümünü kaybetmemek için geçici bir değişkende saklıyorum
+2-curr'in yönünü prev'e çeviriyorum
+3-prev ve curr işaretçilerini ilerleterek işlemi tekrarlıyorum
+
+
+Sonunda prev, tersine çevrilmiş listenin başını tutacaktır"
