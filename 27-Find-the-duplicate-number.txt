@@ -1,4 +1,4 @@
-class Solution {
+class Sol {
     public int findDuplicate(int[] nums) {
        int tortoise = nums[0];
     int hare = nums[0];
