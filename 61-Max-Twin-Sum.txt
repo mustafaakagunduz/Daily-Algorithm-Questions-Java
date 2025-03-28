@@ -1,0 +1,75 @@
+Problemin özeti:
+
+n boyutunda bir bağlı liste var (n çift sayı)
+i indeksli düğüm (0'dan başlayarak) ve (n-1-i) indeksli düğüm birbirlerinin "ikizi" olarak tanımlanıyor
+"İkiz toplam", bir düğümün değeri ile ikizinin değerinin toplamıdır
+Sizden istenen, bağlı listedeki en büyük ikiz toplamını bulmak
+
+Örnek:
+
+Eğer n = 4 ise, düğüm 0 ve düğüm 3 birbirinin ikizi, düğüm 1 ve düğüm 2 birbirinin ikizi olur
+İkiz toplamları hesaplayıp en büyüğünü döndürmeniz gerekiyor
+
+Çözüm yaklaşımı:
+
+Bağlı listeyi ortadan ikiye bölün
+İkinci yarıyı ters çevirin
+İki listeyi paralel olarak dolaşıp ikiz toplamlarını hesaplayın
+En büyük toplamı bulup döndürün
+
+Bu, linked list'ler üzerinde çalışma, ters çevirme ve eşleştirme becerilerini test eden bir problemdir.
+
+------
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public int pairSum(ListNode head) {
+        // Adım 1: Listenin ortasını bulalım (yavaş ve hızlı işaretçi yaklaşımı)
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        // Adım 2: İkinci yarıyı ters çevirelim
+        ListNode secondHalf = reverseList(slow);
+        ListNode firstHalf = head;
+        
+        // Adım 3: İkiz toplamlarını bulup maksimumu hesaplayalım
+        int maxTwinSum = 0;
+        
+        while (secondHalf != null) {
+            maxTwinSum = Math.max(maxTwinSum, firstHalf.val + secondHalf.val);
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+        
+        return maxTwinSum;
+    }
+    
+    // Yardımcı metod: Bağlı listeyi ters çevirme
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        
+        while (current != null) {
+            ListNode nextTemp = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextTemp;
+        }
+        
+        return prev;
+    }
+}
