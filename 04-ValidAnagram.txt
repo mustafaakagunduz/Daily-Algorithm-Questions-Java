@@ -1,6 +1,6 @@
 THIS FILE INCLUDES 3 SOLUTIONS
 
-HASHMAP:
+HASHMAP
 
 import java.util.HashMap;
 import java.util.Map;
