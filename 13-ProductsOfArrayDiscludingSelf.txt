@@ -1,4 +1,4 @@
-public class Solution {
+public class Sol {
     public int[] productExceptSelf(int[] nums) {
 
         int n = nums.length;
