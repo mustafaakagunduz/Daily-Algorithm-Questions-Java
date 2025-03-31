@@ -12,7 +12,7 @@ Return the sum of all the scores on the record. The test cases are generated so 
 
 import java.util.Stack;
 
-class Sol {
+class Solution {
     public int calPoints(String[] ops) {
         // Yığın (stack) kullanımı için bir Stack oluşturuyoruz
         Stack<Integer> stack = new Stack<>();
