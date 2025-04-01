@@ -1,0 +1,29 @@
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> root1List = new ArrayList<>();
+        List<Integer> root2List = new ArrayList<>();
+        
+        // Her iki ağacın yapraklarını toplama
+        collectLeaves(root1, root1List);
+        collectLeaves(root2, root2List);
+        
+        // Listeleri karşılaştırma
+        return root1List.equals(root2List);
+    }
+    
+    private void collectLeaves(TreeNode root, List<Integer> leaves) {
+        if (root == null) {
+            return;
+        }
+        
+        // Eğer bu bir yaprak düğümse (sol ve sağ çocuğu yoksa)
+        if (root.left == null && root.right == null) {
+            leaves.add(root.val);
+            
+        }
+        
+        // Ağacı rekürsif olarak dolaşma (sol önce, sonra sağ)
+        collectLeaves(root.left, leaves);
+        collectLeaves(root.right, leaves);
+    }
+}

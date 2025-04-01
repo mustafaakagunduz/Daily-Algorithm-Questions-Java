@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ * int val;
+ * TreeNode left;
+ * TreeNode right;
+ * TreeNode() {}
+ * TreeNode(int val) { this.val = val; }
+ * TreeNode(int val, TreeNode left, TreeNode right) {
+ * this.val = val;
+ * this.left = left;
+ * this.right = right;
+ * }
+ * }
+ */
+class Solution {
+    public int goodNodes(TreeNode root) {
+        return countGoodNodes(root, Integer.MIN_VALUE);
+    }
+    
+    private int countGoodNodes(TreeNode node, int maxSoFar) {
+        // Base case: boş düğüm için 0 döndür
+        if (node == null) {
+            return 0;
+        }
+        
+        // Mevcut düğümün değeri, şimdiye kadarki maksimumdan büyük veya eşitse
+        // bu bir "iyi düğüm"dür
+        int count = node.val >= maxSoFar ? 1 : 0;
+        
+        // Yolda ilerlerken maksimum değeri güncelle
+        int newMax = Math.max(maxSoFar, node.val);
+        
+        // Sol ve sağ alt ağaçları yeni maksimumla ziyaret et
+        count += countGoodNodes(node.left, newMax);
+        count += countGoodNodes(node.right, newMax);
+        
+        return count;
+    }
+}
