@@ -1,0 +1,63 @@
+Given the root of a binary tree and an integer targetSum, return the number of paths where the sum of the values along the path equals targetSum.
+
+The path does not need to start or end at the root or a leaf, but it must go downwards (i.e., traveling only from parent nodes to child nodes).
+
+Input: root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8
+Output: 3
+Explanation: The paths that sum to 8 are shown.
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int pathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+        
+        // HashMap to store the prefix sum and its frequency
+        Map<Long, Integer> prefixSumCount = new HashMap<>();
+        prefixSumCount.put(0L, 1); // Empty path has sum 0
+        
+        // Start DFS with the prefix sum map
+        return countPathsWithSum(root, 0L, targetSum, prefixSumCount);
+    }
+    
+    private int countPathsWithSum(TreeNode node, long currentSum, int targetSum, Map<Long, Integer> prefixSumCount) {
+        if (node == null) {
+            return 0;
+        }
+        
+        // Add current node's value to the running sum
+        currentSum += node.val;
+        
+        // Check if there are any paths ending at current node with sum = targetSum
+        // by looking for a prefix sum of (currentSum - targetSum)
+        int numPathsEndingHere = prefixSumCount.getOrDefault(currentSum - targetSum, 0);
+        
+        // Add the current sum to the prefix sum map
+        prefixSumCount.put(currentSum, prefixSumCount.getOrDefault(currentSum, 0) + 1);
+        
+        // Recursively explore left and right subtrees
+        int totalPaths = numPathsEndingHere;
+        totalPaths += countPathsWithSum(node.left, currentSum, targetSum, prefixSumCount);
+        totalPaths += countPathsWithSum(node.right, currentSum, targetSum, prefixSumCount);
+        
+        // Remove the current path's sum when going up (backtracking)
+        prefixSumCount.put(currentSum, prefixSumCount.get(currentSum) - 1);
+        
+        return totalPaths;
+    }
+}
