@@ -22,7 +22,7 @@ Input: chars = ["a","b","b","b","b","b","b","b","b","b","b","b","b"]
 Output: Return 4, and the first 4 characters of the input array should be: ["a","b","1","2"].
 Explanation: The groups are "a" and "bbbbbbbbbbbb". This compresses to "ab12".
 
-class Solution {
+class Sol {
     public int compress(char[] chars) {
         
         int writer = 0; //we will use this value to fill the array
