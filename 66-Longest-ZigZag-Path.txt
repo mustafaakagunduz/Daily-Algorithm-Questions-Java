@@ -66,3 +66,36 @@ class Solution {
         }
     }
 }
+
+Bu ZigZag yolu problemi için Java çözümü oluşturdum. Çözüm, ikili ağaçtaki en uzun ZigZag yolunu bulmak için derinlik öncelikli arama (DFS) kullanıyor.
+İşte bu çözümün nasıl çalıştığının açıklaması:
+
+Temel Yaklaşım: Her düğümden başlayan zigzag yollarını keşfetmek için derinlik öncelikli arama (DFS) kullanılır.
+Durum Takibi: Algoritmada üç şeyi takip ediyoruz:
+
+Mevcut düğüm (node)
+Şu ana kadar olan zigzag yolunun uzunluğu (length)
+Bir önceki adımdaki yön (isLeft - sola mı yoksa sağa mı gittiğimizi belirtir)
+
+
+Rekürsif DFS Fonksiyonu:
+
+Eğer geçerli düğüm null ise, rekürsiyonu sonlandırırız.
+Her düğümde, mevcut zigzag uzunluğunu global maksimum ile karşılaştırıp gerekirse güncelliyoruz.
+Mevcut yöne bağlı olarak:
+
+Eğer sol yönden geldiysek, zigzag için bir sonraki adım sağ olmalıdır.
+Eğer sağ yönden geldiysek, zigzag için bir sonraki adım sol olmalıdır.
+
+
+
+
+İki Tip Çağrı:
+
+Zigzag devam ettirme: Mevcut zigzag yoluna devam etmek için, zıt yöndeki çocuk düğüme gideriz ve uzunluğu bir artırırız.
+Yeni zigzag başlatma: Aynı zamanda, her düğümde yeni bir zigzag yolu başlatma olasılığını da kontrol ederiz. Bu durumda uzunluğu 1'e resetleriz.
+
+
+Başlangıç: Kök düğümden başlayarak hem sol hem de sağ yönlerde zigzag yolları aramaya başlarız.
+
+Bu çözüm ağaçtaki her düğümü tam olarak bir kez ziyaret ettiği için zaman karmaşıklığı O(n)'dir, burada n ağaçtaki düğüm sayısıdır. Uzay karmaşıklığı ise rekürsif çağrı yığını için O(h) olur, burada h ağacın yüksekliğidir.
