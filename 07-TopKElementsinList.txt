@@ -1,6 +1,6 @@
 
 
-class Sol {
+class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         // Sayıların frekanslarını hesapla
         Map<Integer, Integer> frequencyMap = new HashMap<>();
