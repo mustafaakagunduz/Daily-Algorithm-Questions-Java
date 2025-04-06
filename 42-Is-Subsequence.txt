@@ -15,7 +15,7 @@ Output: false
 
 class Solution {
     public boolean isSubsequence(String s, String t) {
-        // s boşsa, her zaman alt dizi sayılır
+        // s boşsa, her zaman alt dizi sayılır..
         if (s.length() == 0) return true;
         
         int sIndex = 0;
