@@ -1,0 +1,64 @@
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+
+A word is a maximal substring consisting of non-space characters only.
+
+ 
+
+Example 1:
+
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+Example 2:
+
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+
+class Solution {
+    public int lengthOfLastWord(String s) {        
+
+        String[] words = s.trim().split("\\s+");
+
+        String lastword = words[words.length-1];
+
+        return lastword.length();
+        
+    }
+}
+
+manuel:
+public static int countWordsManually(String text) {
+    // Null veya boş string kontrolü
+    if (text == null || text.trim().isEmpty()) {
+        return 0;
+    }
+    
+    // Baştaki ve sondaki boşlukları temizle
+    text = text.trim();
+    
+    // Kelime sayacı
+    int wordCount = 0;
+    
+    // Şu anda bir kelime içinde olup olmadığımızı takip eden değişken
+    boolean isInsideWord = false;
+    
+    // Metni karakter karakter dolaş
+    for (int i = 0; i < text.length(); i++) {
+        char currentChar = text.charAt(i);
+        
+        if (Character.isWhitespace(currentChar)) {
+            // Eğer boşluk karakteriyle karşılaşırsak, artık bir kelime içinde değiliz
+            isInsideWord = false;
+        } else if (!isInsideWord) {
+            // Eğer boşluk olmayan bir karakterle karşılaşır ve henüz bir kelime içinde değilsek,
+            // bu durumda yeni bir kelimeye başlamış oluyoruz
+            isInsideWord = true;
+            wordCount++;
+        }
+        // Eğer zaten bir kelime içindeysek ve boşluk olmayan bir karakterle karşılaşırsak,
+        // bu kelimeye devam ediyoruz ve sayacı artırmıyoruz
+    }
+    
+    return wordCount;
+}
