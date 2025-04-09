@@ -68,26 +68,20 @@ pratik : en sondan gelmek:
 
 class Solution {
     public int lengthOfLastWord(String s) {
-    // Null veya boş string kontrolü
-    if (s == null || s.length() == 0) {
-        return 0;
+        // Null veya boş string kontrolü
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        
+        s = s.trim();
+        int index = s.length() - 1;
+        int length = 0;
+        
+        while (index >= 0 && !Character.isWhitespace(s.charAt(index))) {
+            length++;
+            index--;
+        }
+        
+        return length;
     }
-    
-    // Stringin sonundan başlayarak geriye doğru ilerle
-    int length = 0;
-    int index = s.length() - 1;
-    
-    // Sondaki boşlukları atla
-    while (index >= 0 && s.charAt(index) == ' ') {
-        index--;
-    }
-    
-    // Son kelimeyi bul ve uzunluğunu hesapla
-    while (index >= 0 && s.charAt(index) != ' ') {
-        length++;
-        index--;
-    }
-    
-    return length;
-}
 }
