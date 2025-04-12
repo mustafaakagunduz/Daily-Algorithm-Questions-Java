@@ -1,0 +1,65 @@
+Given two binary strings a and b, return their sum as a binary string.
+
+ 
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+
+---------
+
+class Solution {
+    public String addBinary(String a, String b) {
+    
+    StringBuilder result = new StringBuilder();
+
+    int i = a.length() - 1;
+    int j = b.length() - 1;
+    int carry = 0;
+
+    while (i >= 0 || j >= 0 || carry > 0) {
+        int bitA = (i >= 0) ? a.charAt(i) - '0' : 0;
+        int bitB = (j >= 0) ? b.charAt(j) - '0' : 0;
+
+        int sum = bitA + bitB + carry;
+        result.append(sum % 2);
+        carry = sum / 2;
+
+        i--;
+        j--;
+    }
+
+    return result.reverse().toString();
+	}
+}
+
+-----------
+
+Bu çözüm, iki binary (ikili) string'i toplayarak sonucu yine binary string olarak döndüren bir algoritma. İşte adım adım açıklaması:
+
+StringBuilder result = new StringBuilder(); - Sonuç için boş bir StringBuilder oluşturuluyor. String'leri dinamik olarak birleştirmek için StringBuilder kullanılması performans açısından daha verimli.
+int i = a.length() - 1; ve int j = b.length() - 1; - İki string'in en sağındaki (en düşük değerli) bitlerinden başlayarak işlem yapacağız, bu nedenle son indekslerden başlıyoruz.
+int carry = 0; - Elde (carry) değerini tutacak değişken. İki bit toplandığında elde oluşursa bir sonraki adıma taşınır.
+while (i >= 0 || j >= 0 || carry > 0) - Şu durumlardan herhangi biri varsa döngü devam eder:
+
+İlk string'de (a) hala işlenecek bit var
+İkinci string'de (b) hala işlenecek bit var
+Elde değeri 0'dan büyük
+
+
+Bit değerlerini alıyoruz:
+
+int bitA = (i >= 0) ? a.charAt(i) - '0' : 0; - Eğer a string'inde hala bit varsa o biti alıyoruz, yoksa 0 kullanıyoruz. charAt(i) - '0' işlemi karakter olarak '0' veya '1'i sayısal değere dönüştürür.
+int bitB = (j >= 0) ? b.charAt(j) - '0' : 0; - Aynı işlemi b string'i için yapıyoruz.
+
+
+int sum = bitA + bitB + carry; - İki biti ve elde değerini topluyoruz.
+result.append(sum % 2); - Toplam değerinin 2'ye bölümünden kalanı sonuca ekliyoruz. Bu, binary toplama mantığına göre sonuç bitini verir (0+0=0, 0+1=1, 1+1=0 ve elde 1).
+carry = sum / 2; - Elde değerini güncelliyoruz. Eğer sum 2 veya 3 ise elde 1 olur, aksi halde 0 olur.
+i--; j--; - Her iki string'de de bir sonraki (sola doğru) bite geçiyoruz.
+return result.reverse().toString(); - Sonuç string'ini ters çeviriyoruz ve string olarak döndürüyoruz. Ters çevirmemizin nedeni, hesaplamayı en düşük değerli bitten başlayarak yaptığımız için sonucun da aynı sırada oluşmasıdır.
