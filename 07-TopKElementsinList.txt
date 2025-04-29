@@ -1,4 +1,4 @@
-bir dizideki en fazla yer alan k elementi verir
+bir dizideki en fazla yer alan k elementi verir.
 
 class Sol {
     public int[] topKFrequent(int[] nums, int k) {
