@@ -1,0 +1,28 @@
+Merge-Intervals
+
+import java.util.*;
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0],b[0]));
+
+        List<int []> mergedResultList = new ArrayList<>();
+
+        for(int [] interval : intervals){
+            int lastElementOfMergedResultList = mergedResultList.size()-1;
+            //1 - listenin boş olması veya çakışma olmaması
+            if(mergedResultList.isEmpty() || mergedResultList.get(lastElementOfMergedResultList)[1]<interval[0]){
+                mergedResultList.add(interval);
+            }else{
+                //çakışma varsa son elemanın bitişini uygun değerle güncelle. mesela 1,3-2,4 durumunda 1,4 olur iken; 1,5-2,3 çakışmasında 1,5 olmalı. yani ikisinin de son indekslerinden büyük olanı alırız.
+                mergedResultList.get(lastElementOfMergedResultList)[1] = Math.max(mergedResultList.get(lastElementOfMergedResultList)[1],interval[1]);
+            }
+
+        }
+
+        return mergedResultList.toArray(new int[mergedResultList.size()][]);
+
+
+    }
+}
