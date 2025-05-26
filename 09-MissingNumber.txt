@@ -1,4 +1,4 @@
-Matematiksel çözüm
+Matematiksel çözüm:
 class Solution{
 	public int missingNumber(int [ ] nums){
 
