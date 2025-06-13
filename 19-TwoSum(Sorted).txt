@@ -1,4 +1,4 @@
-class Solution {
+class Sol {
     public int[] twoSum(int[] numbers, int target) {
         int left = 0; // Başlangıçtaki sol pointer
         int right = numbers.length - 1; // Başlangıçtaki sağ pointer
