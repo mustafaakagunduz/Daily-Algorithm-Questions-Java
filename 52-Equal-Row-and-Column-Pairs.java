@@ -1,4 +1,4 @@
-soru:
+soru-
 
 
 Given a 0-indexed n x n integer matrix grid, return the number of pairs (ri, cj) such that row ri and column cj are equal.
