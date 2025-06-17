@@ -1,5 +1,5 @@
 /*
-baştan ve sondan iki pointer kullanarak sesli harflere denk gelince pointerları durduruyoruz ve onları swap ediyoruz mantık bu şekilde
+baştan ve sondan iki pointer kullanarak sesli harflere denk gelince pointerları durduruyoruz ve onları swap ediyoruz mantık bu şekilde..
 */
 
 class Solution {
