@@ -1,4 +1,4 @@
-Stack Impl
+Stack Implementation
 
 class Solution {
     public int[] dailyTemperatures(int[] temperatures) {
