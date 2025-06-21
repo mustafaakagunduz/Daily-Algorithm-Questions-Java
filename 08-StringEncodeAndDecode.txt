@@ -1,4 +1,4 @@
-class Sol {
+class Solution {
 
     public String encode(List<String> strs) {
         StringBuilder encodedString = new StringBuilder();
