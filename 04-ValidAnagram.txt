@@ -101,31 +101,4 @@ class Solution {
     }
 }
 
-SET: //bunu incele
-class Solution {
-    public boolean isAnagram(String s, String t) {
-        // Kelimelerin uzunlukları eşit değilse, anagram olamazlar
-        if (s.length() != t.length()) {
-            return false;
-        }
-        
-        // s kelimesindeki karakterleri HashSet'e ekle
-        Set<Character> charSet = new HashSet<>();
-        for (char c : s.toCharArray()) {
-            charSet.add(c);
-        }
-        
-        // t kelimesindeki karakterleri HashSet'ten sil
-        for (char c : t.toCharArray()) {
-            if (!charSet.contains(c)) {
-                return false;
-            }
-            charSet.remove(c);
-        }
-        
-        // HashSet boş olmalı, aksi takdirde anagram değildir
-        return charSet.isEmpty();
-    }
-}
-
 
