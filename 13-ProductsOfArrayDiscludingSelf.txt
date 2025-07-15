@@ -1,5 +1,5 @@
-public class Sol {
-    public int[] productExceptSelf(int[] nums) {
+.public class Sol {
+    public int[] productExceptSelf(int[] nums) { 1-2-3-4 -> lp : 1,1,2,6 ; rp: 24,12,4,1 -> res: 24,12,8,6
 
         int n = nums.length;
         int [] leftProducts = new int [n];
